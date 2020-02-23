@@ -1,0 +1,32 @@
+language: node_js
+dist: trusty
+os: linux
+
+env:
+  global:
+    - PROJECT_NAME="jenkins_slave" TEST_TAG="$PROJECT_NAME:test"
+
+services:
+  - docker
+
+stages:
+  - syntax
+  - build
+  - test
+
+jobs:
+  include:
+  - stage: syntax
+    name: Dockerfile syntax
+    install:
+      - npm install -g dockerlint
+    script: dockerlint -f Dockerfile
+  - stage: build
+    name: Build docker image
+    script:
+      - docker build --tag "${TEST_TAG}" .
+  - stage: test
+    name: Test docker image
+    install:
+      - docker build --tag "${TEST_TAG}" .
+    script: dgoss run "${TEST_TAG}"

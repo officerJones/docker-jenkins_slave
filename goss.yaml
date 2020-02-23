@@ -1,0 +1,76 @@
+file:
+  /etc/ssh/ssh_host_dsa_key:
+    exists: true
+    mode: "0600"
+    contains: []
+  /etc/ssh/ssh_host_dsa_key.pub:
+    exists: true
+    mode: "0644"
+    contains: []
+  /etc/ssh/ssh_host_ecdsa_key:
+    exists: true
+    mode: "0600"
+    contains: []
+  /etc/ssh/ssh_host_ecdsa_key.pub:
+    exists: true
+    mode: "0644"
+    contains: []
+  /etc/ssh/ssh_host_ed25519_key:
+    exists: true
+    mode: "0600"
+    contains: []
+  /etc/ssh/ssh_host_ed25519_key.pub:
+    exists: true
+    mode: "0644"
+    contains: []
+  /etc/ssh/ssh_host_rsa_key:
+    exists: true
+    mode: "0600"
+    contains: []
+  /etc/ssh/ssh_host_rsa_key.pub:
+    exists: true
+    mode: "0644"
+    contains: []
+  /etc/ssh/sshd_config:
+    exists: true
+    contains:
+    - Port 22
+    - UsePAM yes
+  /usr/local/bin/goss:
+    exists: true
+    mode: "0755"
+    contains: []
+  /usr/local/bin/dgoss:
+    exists: true
+    mode: "0755"
+    contains: []
+  /usr/local/bin/dcgoss:
+    exists: true
+    mode: "0755"
+    contains: []
+port:
+  tcp:22:
+    listening: true
+    ip:
+    - 0.0.0.0
+user:
+  jenkins:
+    exists: true
+    uid: 1000
+    gid: 1000
+    home: /home/jenkins
+command:
+  docker --version:
+    exit-status: 0
+    stdout: []
+    stderr: []
+    timeout: 0
+  pip list:
+    exit-status: 0
+    stdout:
+    - docker-compose
+    stderr: []
+    timeout: 0
+process:
+  sshd:
+    running: true
