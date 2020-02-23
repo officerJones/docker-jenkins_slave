@@ -40,6 +40,7 @@ pipeline {
         stage('Tests') {
             environment {
                 // Variables used by GOSS framework
+                GOSS_FILES_STRATEGY="cp"
                 GOSS_OPTS="--format junit"
             }
             steps {
