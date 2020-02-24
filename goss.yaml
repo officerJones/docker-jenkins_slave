@@ -60,11 +60,6 @@ user:
     gid: 1000
     home: /home/jenkins
 command:
-  docker --version:
-    exit-status: 0
-    stdout: []
-    stderr: []
-    timeout: 0
   pip list:
     exit-status: 0
     stdout:
