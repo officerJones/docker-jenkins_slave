@@ -4,7 +4,7 @@ os: linux
 
 env:
   global:
-    - PROJECT_NAME="jenkins_slave" TEST_TAG="$PROJECT_NAME:test"
+    - PROJECT_NAME="jenkins_slave" TEST_TAG="$PROJECT_NAME:test" GOSS_VERSION="v0.3.9"
 
 services:
   - docker
@@ -29,4 +29,8 @@ jobs:
     name: Test docker image
     install:
       - docker build --tag "${TEST_TAG}" .
+      - curl -L https://goss.rocks/install | sudo sh
+      - curl -L https://raw.githubusercontent.com/aelsabbahy/goss/"${GOSS_VERSION}"/extras/dgoss/dgoss > dgoss
+      - chmod +rx dgoss
+      - sudo mv dgoss /usr/local/bin
     script: dgoss run "${TEST_TAG}"
