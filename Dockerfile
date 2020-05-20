@@ -46,8 +46,10 @@ RUN ssh-keygen -A \
  && groupadd -g 1000 1000 \
  && useradd -c "Jenkins user" -d /home/jenkins -u 1000 -g 1000 -m jenkins \
  && echo "jenkins:jenkins" | chpasswd \
- && groupadd docker -g 995 \
- && usermod -a -G 995 jenkins
+# && groupadd docker -g 995 \
+# && usermod -a -G 995 jenkins
+ && groupadd docker -g 996 \
+ && usermod -a -G 996 jenkins
 
 # Add the ssh configuration
 ADD ./ssh_config /etc/ssh/sshd_config
